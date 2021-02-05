@@ -1,0 +1,144 @@
+<div class="container-fluid">
+
+    <form [formGroup]="forma" (ngSubmit)="generarVenta()">
+
+        <!-- Table -->
+        <div class="row animated fadeIn faster" style="justify-content: center;">
+            <div class="col-xl-10 order-xl-1 mt-8">
+                <div class="card bg-secondary shadow">
+                    <div class="card-body">
+
+                        <h6 class="heading-small text-muted mb-4">Información del cliente</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="txt_Apellidos">Cédula</label>
+                                        <input type="text" id="txt_Apellidos" class="form-control form-control-alternative" placeholder="Cédula" formControlName="cedula" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-5 form-inline justify-content-end mt-2">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".modalSeleccionarCliente"><i class="ni ni-check-bold"></i> Buscar</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-first-name">Nombres</label>
+                                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Nombres" formControlName="nombres" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-last-name">Apellidos</label>
+                                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Apellidos" formControlName="apellidos" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Productos</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <button id="btn_BuscarProducto" type="button" class="btn btn-secondary" data-toggle="modal" data-target=".modalSeleccionarProducto" (click)="obtenerDatosProductos()"><i class="ni ni-check-bold "></i> Buscar Producto</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- (keyup)="changeValue(id, 'cantidad_venta', $event)"  -->
+
+        <!-- Carrito de compras -->
+        <div class="row animated fadeIn faster" style="justify-content: center;">
+            <div class="col-xl-10">
+                <div class="card shadow ">
+                    <div class="card-header border-0 ">
+                        <h6 class="heading-small text-muted">Listado de productos seleccionados</h6>
+                    </div>
+                    <div class="table-responsive ">
+                        <table class="table align-items-center table-flush ">
+                            <thead class="thead-light ">
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Talla</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let carritoVenta of carritoVentas; let id = index">
+                                    <th> {{ carritoVenta.codigo_producto }} </th>
+                                    <th> {{ carritoVenta.nombre_producto }} </th>
+                                    <th> {{ carritoVenta.color_producto }} </th>
+                                    <th> {{ carritoVenta.talla_producto }} </th>
+                                    <th> {{ carritoVenta.precio_venta }} </th>
+                                    <th> <span id="{{id}}" (blur)="updateList(carritoVenta.id_producto_sucursal, id, 'cantidad_venta', $event)" style="padding: 1rem 1rem" contenteditable="true">{{carritoVenta.cantidad_venta}}</span> </th>
+                                    <th> {{ carritoVenta.precio_venta * carritoVenta.cantidad_venta }} </th>
+                                    <th>
+                                        <button class="btn btn-outline-danger" (click)="remove(id)">X</button>
+                                    </th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer py-4 justify-content-end mb-0">
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12 form-inline justify-content-end mt-2">
+                                    <label class="form-control-label mr-2" for="txt_Subtotal">Subtotal ($)</label>
+                                    <input style="text-align: right;" type="text" class="col-lg-1" id="txt_Subtotal" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 form-inline justify-content-end mt-2">
+                                    <label class="form-control-label mr-2" for="txt_Iva">IVA (12%)</label>
+                                    <input style="text-align: right;" type="text" class="col-lg-1" id="txt_Iva" disabled>
+                                </div>
+                            </div>
+                            <!--       <div class="row">
+                                <div class="col-lg-12 form-inline justify-content-end mt-2">
+                                    <label class="form-control-label mr-2" for="txt_Descuento">Descuento (%)</label>
+                                    <input style="text-align: right;" type="text" class="col-lg-1" id="txt_Descuento" maxlength="3" (blur)="aplicarDescuento()" disabled onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-lg-12 form-inline justify-content-end mt-2">
+                                    <label class="form-control-label mr-2" for="txt_Total">Total ($)</label>
+                                    <input style="text-align: right;" type="text" class="col-lg-1" id="txt_Total" disabled>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-12 form-inline justify-content-end mt-2">
+                                    <button id="btn_GenerarVenta" class="btn btn-success"><i class="ni ni-check-bold"></i> Generar Venta</button>
+                                    <button id="btn_Cancelar" type="button" class="btn btn-danger" (click)="cancelarVenta()"><i class="ni ni-check-bold "></i> Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
