@@ -1,0 +1,98 @@
+<form [formGroup]="forma">
+
+    <!-- Table -->
+    <div class="row animated fadeIn faster" style="justify-content: center;">
+        <div class="col-xl-10 order-xl-1 mt-8">
+            <div class="card bg-secondary shadow">
+                <div class="card-body">
+
+                    <h6 class="heading-small text-muted mb-4">Información del cliente</h6>
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="txt_Apellidos">Cédula</label>
+                                    <input type="text" id="txt_Apellidos" class="form-control form-control-alternative" placeholder="Cédula" formControlName="cedula" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 form-inline justify-content-end mt-2">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".modalSeleccionarCliente"><i class="ni ni-check-bold"></i> Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-first-name">Nombres</label>
+                                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Nombres" formControlName="nombres" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-last-name">Apellidos</label>
+                                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Apellidos" formControlName="apellidos" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+
+
+
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Seleccionar Cliente -->
+
+<div class="modal fade modalSeleccionarCliente" id="exampleModal" tabindex="-1 " role="dialog " aria-labelledby="myLargeModalLabel " aria-hidden="true " style="overflow-y: auto ">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body ">
+                <form>
+
+                    <!-- Table -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
