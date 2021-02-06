@@ -1,11 +1,10 @@
 export interface DetalleVentas{
-    id_orden_pertenece: number,
-    id_producto: number,
-    nombre_producto: string,
-    precio_producto: number;
-    cantidad_producto: number, 
-    stock_producto?: number,
-    subtotal: number,
-    descuento_producto?: number,
-
+    Id_Orden_Pertenece: number,
+    Id_Producto: number,
+    Nombre_Producto: string,
+    Precio_Producto: number;
+    Cantidad_Producto: number, 
+    Stock_Producto?: number,
+    Subtotal: number,
+    Descuento_Producto?: number
 }

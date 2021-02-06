@@ -117,12 +117,12 @@ export class FacturaComponent implements OnInit {
   
       if(this.carritoVentas.length === 0 ){
          let prod: DetalleVentas = {
-          id_orden_pertenece: 0,
-          id_producto: producto.Id_Producto,
-          nombre_producto: producto.Nombre_Producto, 
-          precio_producto: producto.Precio_Producto,
-          cantidad_producto: 1,
-          subtotal: 0
+          Id_Orden_Pertenece: 0,
+          Id_Producto: producto.Id_Producto,
+          Nombre_Producto: producto.Nombre_Producto, 
+          Precio_Producto: producto.Precio_Producto,
+          Cantidad_Producto: 1,
+          Subtotal: 0
         }
           this.p.push(prod);
           this.carritoVentas = this.p;
@@ -145,12 +145,12 @@ export class FacturaComponent implements OnInit {
         
         if(!existe){
            let prod: DetalleVentas = {
-            id_orden_pertenece: 0,
-            id_producto: producto.Id_Producto,
-            nombre_producto: producto.Nombre_Producto, 
-            precio_producto: producto.Precio_Producto,
-            cantidad_producto: 1,
-            subtotal: 0
+            Id_Orden_Pertenece: 0,
+            Id_Producto: producto.Id_Producto,
+            Nombre_Producto: producto.Nombre_Producto, 
+            Precio_Producto: producto.Precio_Producto,
+            Cantidad_Producto: 1,
+            Subtotal: 0
           }
             this.p.push(prod);
             this.carritoVentas = this.p; 
@@ -203,7 +203,7 @@ export class FacturaComponent implements OnInit {
                     timer: 2000
                   })
                  
-                  
+
                   
                 this.loadingD = false;
                 this.forma.reset();

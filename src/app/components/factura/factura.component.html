@@ -83,11 +83,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let carritoVenta of carritoVentas; let id = index">
-                                <th> {{ carritoVenta.id_producto }} </th>
-                                <th> {{ carritoVenta.nombre_producto }} </th>
-                                <th> {{ carritoVenta.precio_producto }} </th>
-                                <th> <span id="{{id}}" (blur)="updateList(carritoVenta.id_producto, id, 'cantidad_producto', $event)" style="padding: 1rem 1rem" contenteditable="true">{{carritoVenta.cantidad_producto}}</span> </th>
-                                <th> {{ carritoVenta.precio_producto * carritoVenta.cantidad_producto }} </th>
+                                <th> {{ carritoVenta.Id_Producto }} </th>
+                                <th> {{ carritoVenta.Nombre_Producto }} </th>
+                                <th> {{ carritoVenta.Precio_Producto }} </th>
+                                <th> <span id="{{id}}" (blur)="updateList(carritoVenta.Id_Producto, id, 'Cantidad_Producto', $event)" style="padding: 1rem 1rem" contenteditable="true">{{carritoVenta.Cantidad_Producto}}</span> </th>
+                                <th> {{ carritoVenta.Precio_Producto * carritoVenta.Cantidad_Producto }} </th>
                                 <th>
                                     <button class="btn btn-outline-danger" (click)="remove(id)">X</button>
                                 </th>
