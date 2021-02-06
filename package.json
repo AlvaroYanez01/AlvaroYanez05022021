@@ -21,6 +21,7 @@
     "@angular/router": "~10.0.6",
     "bootstrap": "^5.0.0-beta1",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^10.14.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

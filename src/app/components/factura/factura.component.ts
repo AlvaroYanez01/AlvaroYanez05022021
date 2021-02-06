@@ -4,6 +4,9 @@ import { PagerService } from '../../services/pager.service';
 import { ClientesService } from '../../services/clientes.service';
 import { ProductosService } from '../../services/productos.service';
 import { DetalleVentas } from '../../interfaces/DetalleVentas';
+import { Venta } from '../../interfaces/Venta';
+import Swal from 'sweetalert2';
+import { OrdenService } from '../../services/orden.service';
 
 @Component({
   selector: 'app-factura',
@@ -41,7 +44,8 @@ export class FacturaComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private pagerService: PagerService,
     private clienteServices: ClientesService,
-    private productoServices: ProductosService) { }
+    private productoServices: ProductosService,
+    private ventaServices: OrdenService) { }
 
   ngOnInit(): void {
     this.crearFormulario();
@@ -160,9 +164,95 @@ export class FacturaComponent implements OnInit {
     }
 
 
-  generarVenta(){
-
-  }
+    generarVenta(){
+  
+        var hoy = new Date();
+        var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+  
+        document.getElementById('btn_GenerarVenta').setAttribute('disabled', 'disabled');
+        //console.log(this.desc);
+        let venta: Venta = {
+          Id_Orden: 0,
+          Id_Cliente: this.id_Cliente.toString(),
+          Id_Empleado: 1,
+        }
+    
+        Swal.fire({
+          title: 'Nueva venta',
+          text: `¿Está seguro que desea generar la venta?`,
+          icon: 'question',
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then( resp => {
+  
+    
+    
+          if(resp.value){
+            this.loadingD = true;
+            console.log(venta);
+            this.ventaServices.postOrden(venta).subscribe(
+              res => { 
+                console.log(res)
+                   // Posteo de la información
+              
+                   Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Se genero la venta con éxito',
+                    showConfirmButton: false,
+                    timer: 2000
+                  })
+                 
+                  
+                  
+                this.loadingD = false;
+                this.forma.reset();
+                this.carritoVentas = [];
+                this.p = [];
+                //this.controlInicio();
+                (document.getElementById('txt_Subtotal') as HTMLInputElement).value = "";
+                (document.getElementById('txt_Iva') as HTMLInputElement).value =  "";
+                //(document.getElementById('txt_Descuento') as HTMLInputElement).value = ""; 
+                (document.getElementById('txt_Total') as HTMLInputElement).value =  "";
+                (document.getElementById('txt_Descuento') as HTMLInputElement).disabled = true;
+                //this.descuento = 0; 
+  
+                console.log(resp);
+                this.abonoNoValido = false;
+    
+              },
+              err => console.log(err)
+    
+  /*             Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error y no se generar la venta, intentelo más tarde'
+              }).then( resp => {
+                this.loadingD = false;
+                this.forma.reset();
+                this.carritoVentas = [];
+                this.p = [];
+                this.controlInicio();
+                (document.getElementById('txt_Subtotal') as HTMLInputElement).value = "";
+                (document.getElementById('txt_Iva') as HTMLInputElement).value =  "";
+                (document.getElementById('txt_Descuento') as HTMLInputElement).value = ""; 
+                (document.getElementById('txt_Total') as HTMLInputElement).value =  "";
+                (document.getElementById('txt_Descuento') as HTMLInputElement).disabled = true; 
+                this.descuento = 0;
+                this.abonoNoValido = false;
+              })  */
+    
+            );
+          
+          }
+    
+        });
+  
+  
+      
+  
+  
+    }
 
   cancelarVenta(){
 
