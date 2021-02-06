@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PagerService } from '../../services/pager.service';
 import { ClientesService } from '../../services/clientes.service';
 import { ProductosService } from '../../services/productos.service';
+import { DetalleVentas } from '../../interfaces/DetalleVentas';
 
 @Component({
   selector: 'app-factura',
@@ -50,9 +51,9 @@ export class FacturaComponent implements OnInit {
     //Crear formulario
   crearFormulario(){
     this.forma = this.fb.group({
-      cedula: [''],
-      nombres: [''],
-      apellidos: [''],
+      id: [''],
+      compania: [''],
+      cliente: [''],
       cantidad: ['']
     });
 
@@ -92,47 +93,43 @@ export class FacturaComponent implements OnInit {
     
   //Seleccionar cliente
   seleccionarCliente(cliente: any){
-    //console.log(cliente.cedula_persona);
-    this.id_Cliente = cliente.id_cliente;
+    console.log(cliente);
+    this.id_Cliente = cliente.Id_Cliente;
     this.forma.reset({
-      cedula: cliente.cedula_persona,
-      nombres: cliente.nombres_persona,
-      apellidos: cliente.apellidos_persona
+      id: cliente.Id_Cliente,
+      compania: cliente.Nombre_Compania,
+      cliente: cliente.Nombre_Cliente
     })
 
   }
 
 
     //Seleccionar producto y agregar a carrito venta
-   // p: DetalleVentas[] = [];
+    p: DetalleVentas[] = [];
     seleccionarProducto(producto){
       //console.log(producto.codigo_producto);
       console.log(producto);
       let existe: boolean = false;
   
       if(this.carritoVentas.length === 0 ){
-        /* let prod: DetalleVentas = {
-          id_detalle_ventas: 0,
-          id_venta_pertenece: 0,
-          id_producto_pertenece: producto.id_producto,
-          id_producto_sucursal: producto.id_producto_sucursal,
-          codigo_producto: producto.codigo_producto,
-          nombre_producto: producto.nombre_producto, 
-          color_producto: producto.nombre_color,
-          talla_producto: producto.nombre_talla,
-          cantidad_venta: 1,
-          precio_venta: producto.precio_producto
+         let prod: DetalleVentas = {
+          id_orden_pertenece: 0,
+          id_producto: producto.Id_Producto,
+          nombre_producto: producto.Nombre_Producto, 
+          precio_producto: producto.Precio_Producto,
+          cantidad_producto: 1,
+          subtotal: 0
         }
           this.p.push(prod);
           this.carritoVentas = this.p;
-          document.getElementById('btn_GenerarVenta').removeAttribute('disabled');
+/*           document.getElementById('btn_GenerarVenta').removeAttribute('disabled');
           document.getElementById('btn_Cancelar').removeAttribute('disabled');
-          document.getElementById('txt_Descuento').removeAttribute('disabled');  */
+          document.getElementById('txt_Descuento').removeAttribute('disabled');   */
       }else{
   
         for(let i in this.carritoVentas){
-          //console.log(this.carritoVentas[i]["codigo_producto"]);
-          let codigoTemp = this.carritoVentas[i]["codigo_producto"];
+          console.log(this.carritoVentas[i]["id_producto"]);
+          let codigoTemp = this.carritoVentas[i]["id_producto"];
           if(codigoTemp === producto.codigo_producto ){
             console.log('Ya existe');
             existe = true;
@@ -143,20 +140,16 @@ export class FacturaComponent implements OnInit {
         }
         
         if(!existe){
-/*           let prod: DetalleVentas = {
-            id_detalle_ventas: 0,
-            id_venta_pertenece: 0,
-            id_producto_pertenece: producto.id_producto,
-            id_producto_sucursal: producto.id_producto_sucursal,
-            codigo_producto: producto.codigo_producto,
-            nombre_producto: producto.nombre_producto, 
-            color_producto: producto.nombre_color,
-            talla_producto: producto.nombre_talla,
-            cantidad_venta: 1,
-            precio_venta: producto.precio_producto
+           let prod: DetalleVentas = {
+            id_orden_pertenece: 0,
+            id_producto: producto.Id_Producto,
+            nombre_producto: producto.Nombre_Producto, 
+            precio_producto: producto.Precio_Producto,
+            cantidad_producto: 1,
+            subtotal: 0
           }
             this.p.push(prod);
-            this.carritoVentas = this.p; */
+            this.carritoVentas = this.p; 
         
         }
   

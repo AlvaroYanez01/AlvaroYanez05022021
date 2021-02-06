@@ -11,8 +11,8 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="txt_Apellidos">Cédula</label>
-                                    <input type="text" id="txt_Apellidos" class="form-control form-control-alternative" placeholder="Cédula" formControlName="cedula" readonly>
+                                    <label class="form-control-label" for="txt_Apellidos">Id</label>
+                                    <input type="text" id="txt_Apellidos" class="form-control form-control-alternative" placeholder="Id" formControlName="id" readonly>
                                 </div>
                             </div>
 
@@ -28,14 +28,14 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Nombres</label>
-                                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Nombres" formControlName="nombres" readonly>
+                                    <label class="form-control-label" for="input-first-name">Compania</label>
+                                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Compania" formControlName="compania" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-last-name">Apellidos</label>
-                                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Apellidos" formControlName="apellidos" readonly>
+                                    <label class="form-control-label" for="input-last-name">Cliente</label>
+                                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Cliente" formControlName="cliente" readonly>
                                 </div>
                             </div>
                         </div>
@@ -73,10 +73,8 @@
                     <table class="table align-items-center table-flush ">
                         <thead class="thead-light ">
                             <tr>
-                                <th scope="col">Código</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Producto</th>
-                                <th scope="col">Color</th>
-                                <th scope="col">Talla</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Subtotal</th>
@@ -85,13 +83,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let carritoVenta of carritoVentas; let id = index">
-                                <th> {{ carritoVenta.codigo_producto }} </th>
+                                <th> {{ carritoVenta.id_producto }} </th>
                                 <th> {{ carritoVenta.nombre_producto }} </th>
-                                <th> {{ carritoVenta.color_producto }} </th>
-                                <th> {{ carritoVenta.talla_producto }} </th>
-                                <th> {{ carritoVenta.precio_venta }} </th>
-                                <th> <span id="{{id}}" (blur)="updateList(carritoVenta.id_producto_sucursal, id, 'cantidad_venta', $event)" style="padding: 1rem 1rem" contenteditable="true">{{carritoVenta.cantidad_venta}}</span> </th>
-                                <th> {{ carritoVenta.precio_venta * carritoVenta.cantidad_venta }} </th>
+                                <th> {{ carritoVenta.precio_producto }} </th>
+                                <th> <span id="{{id}}" (blur)="updateList(carritoVenta.id_producto, id, 'cantidad_producto', $event)" style="padding: 1rem 1rem" contenteditable="true">{{carritoVenta.cantidad_producto}}</span> </th>
+                                <th> {{ carritoVenta.precio_producto * carritoVenta.cantidad_producto }} </th>
                                 <th>
                                     <button class="btn btn-outline-danger" (click)="remove(id)">X</button>
                                 </th>
@@ -173,29 +169,25 @@
                                     <table class="table align-items-center table-flush">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">Imagen</th>
-                                                <th scope="col">Código</th>
+                                                <th scope="col">Id</th>
                                                 <th scope="col">Producto</th>
-                                                <th scope="col">Color</th>
+                                                <th scope="col">Proveedor</th>
                                                 <th scope="col">Categoría</th>
-                                                <th scope="col">Marca</th>
-                                                <th scope="col">Talla</th>
-                                                <th scope="col">Stock</th>
+                                                <th scope="col">Cantidad por unidad</th>
                                                 <th scope="col">Precio</th>
+                                                <th scope="col">Stock</th>
                                                 <th scope="col">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let producto of productos">
-                                                <th> </th>
-                                                <th> {{ producto.codigo_producto }} </th>
-                                                <th> {{ producto.nombre_producto }} </th>
-                                                <th> {{ producto.nombre_color }} </th>
-                                                <th> {{ producto.nombre_categoria }} </th>
-                                                <th> {{ producto.nombre_marca }} </th>
-                                                <th> {{ producto.nombre_talla }} </th>
-                                                <th> {{ producto.cantidad_producto }} </th>
-                                                <th> {{ producto.precio_producto }} </th>
+                                                <th> {{ producto.Id_Producto }} </th>
+                                                <th> {{ producto.Nombre_Producto }} </th>
+                                                <th> {{ producto.Nombre_Proveedor }} </th>
+                                                <th> {{ producto.Nombre_Categoria }} </th>
+                                                <th> {{ producto.CantidadPorUnidad_Producto }} </th>
+                                                <th> {{ producto.Precio_Producto }} </th>
+                                                <th> {{ producto.Stock_Producto }} </th>
                                                 <th>
                                                     <button class="btn btn-outline-info" (click)="seleccionarProducto(producto)" data-dismiss="modal"><i class="ni ni-fat-remove"></i> Seleccionar</button>
                                                 </th>
